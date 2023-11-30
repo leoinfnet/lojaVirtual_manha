@@ -3,11 +3,15 @@ package br.com.acme.lojaVirtual;
 import br.com.acme.lojaVirtual.exception.ResourceNotFoundException;
 import br.com.acme.lojaVirtual.model.Cliente;
 import br.com.acme.lojaVirtual.service.ClienteService;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.RoundingMode;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +26,7 @@ public class ClienteServiceTests {
     @DisplayName("Deve retornar todos os clientes")
     void deveRetornarTodosOsClientes(){
        List<Cliente> clientes =  clienteService.getAll();
-       assertEquals(3, clientes.size());
+       assertEquals(202, clientes.size());
     }
     @Test
     @DisplayName("Deve retornar um cliente pelo ID")
@@ -35,11 +39,6 @@ public class ClienteServiceTests {
         assertThrows(ResourceNotFoundException.class, ()->{
             clienteService.getById(-1);
         });
-
-
-
-
-
     }
     @Test
     @DisplayName("Deve remover um cliente pelo ID")
@@ -81,6 +80,21 @@ public class ClienteServiceTests {
         assertEquals(5, all.size());
         assertEquals("Zezinho", retornado.getNome());
         assertEquals(5L, retornado.getId());
+
+    }
+    @Test
+    public void testaNome(){
+        BigDecimal bigInteger = new BigDecimal("50");
+        BigDecimal bigInteger2 = new BigDecimal("202");
+        int valor = 202 / 50; // =4
+        double valorD = 202.0 / 50.0 ; //= 4.2
+        int ceil = (int )Math.ceil(202.0/50.0);
+
+        System.out.println(ceil);
+
+        BigDecimal divide = bigInteger2.divide(bigInteger, RoundingMode.CEILING);
+        System.out.println(divide);
+
 
     }
 
