@@ -97,5 +97,11 @@ public class ClienteServiceTests {
 
 
     }
+    @Test
+    public void filtraPorNome(){
+        List<Cliente> filtrados = clienteService.filterByName("Leo", 1);
+        assertEquals(0,filtrados.size());
+
+    }
 
 }
